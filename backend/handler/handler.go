@@ -21,7 +21,14 @@ func RegisterUser(c *fiber.Ctx) error {
 	return c.JSON(newUser)
 }
 
-func Test(c *fiber.Ctx) error {
+func FindUser(c *fiber.Ctx) error {
+	userId := c.Params("id")
+	var user models.User
 
-	return c.JSON(fiber.Map{"mssg": "hello world!"})
+	database.DB.First(&user, userId)
+	if user.ID == 0 {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "user not found"})
+	}
+
+	return c.JSON(user)
 }
