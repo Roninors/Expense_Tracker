@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Credentials struct {
 	Email    string `gorm:"type:varchar(100);unique;not null" json:"email"`
-	Password string `gorm:"type:varchar(50);not null" json:"password"`
+	Password string `gorm:"type:varchar(100);not null" json:"password"`
 }
 
 type User struct {
